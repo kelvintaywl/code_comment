@@ -11,7 +11,7 @@ requires = []
 extras_require = {
     "test": [
         "pytest",
-        "coverage",
+        "pytest-cov",
         "flake8"
     ]
 }
@@ -27,6 +27,5 @@ setup(name='code_comment',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
-      test_suite='code_comment',
       install_requires=requires,
       extras_require=extras_require)

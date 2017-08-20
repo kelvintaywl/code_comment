@@ -2,8 +2,8 @@
 
 import os.path
 
-from models import Comment
-from errors import CodeLanguageUnsupported
+from code_comment.models import Comment
+from code_comment.errors import CodeLanguageUnsupported
 
 
 class CodeLanguage:
@@ -173,5 +173,6 @@ class Parser:
                     yield Comment(
                         list(comment_texts),
                         self.filepath,
-                        [line_numbers[0], line_numbers[-1]]
+                        [line_numbers[0], line_numbers[-1]],
+                        is_multiline=True
                     )

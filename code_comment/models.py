@@ -19,7 +19,6 @@ class Comment:
 
     @property
     def body_str(self):
-        # なんで日本語で
         if isinstance(self._body, list):
             return '\n'.join(self._body)
 
