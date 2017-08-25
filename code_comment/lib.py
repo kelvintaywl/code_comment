@@ -76,8 +76,9 @@ class Parser:
             os.path.splitext(path)[1][1:]  # ignore '.'
         )
 
-    def __init__(self, filepath):
+    def __init__(self, filepath, fileobj=None):
         self.filepath = filepath
+        self.fileobj = fileobj
         if not self.is_code_file(self.filepath):
             raise CodeLanguageUnsupported
 
@@ -139,40 +140,47 @@ class Parser:
                 and text.endswith(mlc_footer)
             )
 
-        with open(self.filepath, 'r') as f:
-            for line_number, text in enumerate(
-                [l.strip() for l in f], start=1
-            ):
-                if not text:
-                    continue
+        if self.fileobj is None:
+            fileobj = open(self.filepath)
+        else:
+            fileobj = self.fileobj
 
-                if is_single_line_comment(text):
-                    comment_text = text.split(slc_header)[1].strip()
-                    yield Comment(comment_text, self.filepath, line_number)
+        for line_number, text in enumerate(
+            [l.strip() for l in fileobj], start=1
+        ):
+            if not text:
+                continue
 
-                elif is_single_line_comment_multiline_notation(text):
-                    comment_text = text.split(mlc_header)[1]
-                    comment_text = comment_text.rsplit(mlc_footer)[0].strip()
-                    yield Comment(comment_text, self.filepath, line_number)
+            if is_single_line_comment(text):
+                comment_text = text.split(slc_header)[1].strip()
+                yield Comment(comment_text, self.filepath, line_number)
 
-                elif is_multi_line_comment_start(text):
-                    comment_text = text.split(mlc_header)[1].strip()
-                    tmp.append([comment_text, line_number])
+            elif is_single_line_comment_multiline_notation(text):
+                comment_text = text.split(mlc_header)[1]
+                comment_text = comment_text.rsplit(mlc_footer)[0].strip()
+                yield Comment(comment_text, self.filepath, line_number)
 
-                elif is_multi_line_comment_midst(text):
-                    comment_text = text
-                    if mlc_middle:
-                        comment_text = text.split(mlc_middle)[1].strip()
-                    tmp.append([comment_text, line_number])
+            elif is_multi_line_comment_start(text):
+                comment_text = text.split(mlc_header)[1].strip()
+                tmp.append([comment_text, line_number])
 
-                elif is_multi_line_comment_end(text):
-                    comment_text = text.rsplit(mlc_footer)[0].strip()
-                    tmp.append([comment_text, line_number])
-                    comment_texts, line_numbers = zip(*tmp)
-                    tmp = []
-                    yield Comment(
-                        list(comment_texts),
-                        self.filepath,
-                        [line_numbers[0], line_numbers[-1]],
-                        is_multiline=True
-                    )
+            elif is_multi_line_comment_midst(text):
+                comment_text = text
+                if mlc_middle:
+                    comment_text = text.split(mlc_middle)[1].strip()
+                tmp.append([comment_text, line_number])
+
+            elif is_multi_line_comment_end(text):
+                comment_text = text.rsplit(mlc_footer)[0].strip()
+                tmp.append([comment_text, line_number])
+                comment_texts, line_numbers = zip(*tmp)
+                tmp = []
+                yield Comment(
+                    list(comment_texts),
+                    self.filepath,
+                    [line_numbers[0], line_numbers[-1]],
+                    is_multiline=True
+                )
+
+        if self.fileobj is None:
+            fileobj.close()
