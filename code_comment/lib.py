@@ -146,7 +146,8 @@ class Parser:
             fileobj = self.fileobj
 
         for line_number, text in enumerate(
-            [l.strip() for l in fileobj], start=1
+            [l.strip() if isinstance(l, str) else (l.decode()).strip() 
+             for l in fileobj], start=1
         ):
             if not text:
                 continue
