@@ -12,6 +12,8 @@ class CodeLanguage:
     JAVASCRIPT = 'javascript'
     GOLANG = 'go'
     CPP = 'cpp'
+    C = 'c'
+    JAVA = 'java'
 
     @staticmethod
     def factory(code_name):
@@ -25,6 +27,10 @@ class CodeLanguage:
             return GolangCodeLanguage
         elif code_name == CodeLanguage.CPP:
             return CppCodeLanguage
+        elif code_name == CodeLanguage.C:
+            return CCodeLanguage
+        elif code_name == CodeLanguage.JAVA:
+            return JavaCodeLanguage
         raise CodeLanguageUnsupported
 
 
@@ -39,14 +45,17 @@ class BaseCodeLanguage(CodeLanguage):
 class JavascriptCodeLanguage(BaseCodeLanguage):
     pass
 
-
 class GolangCodeLanguage(BaseCodeLanguage):
     pass
-    
 
 class CppCodeLanguage(BaseCodeLanguage):
     pass
 
+class CCodeLanguage(BaseCodeLanguage):
+    pass
+
+class JavaCodeLanguage(BaseCodeLanguage):
+    pass
 
 class PHPCodeLanguage(BaseCodeLanguage):
     # NOTE: assuming PHPDoc style
@@ -66,7 +75,9 @@ class Parser:
         'php': CodeLanguage.PHP,
         'js': CodeLanguage.JAVASCRIPT,
         'go': CodeLanguage.GOLANG,
-        'cpp': CodeLanguage.CPP
+        'cpp': CodeLanguage.CPP,
+        'c': CodeLanguage.C,
+        'java': CodeLanguage.JAVA
     }
 
     @staticmethod
@@ -95,7 +106,6 @@ class Parser:
 
     def determine_code_language(self):
         ext = os.path.splitext(self.filepath)[1][1:]
-        print(ext)
         return self.SUPPORTED_CODE_FILE_EXTENSIONS.get(ext)
 
     def __iter__(self):
