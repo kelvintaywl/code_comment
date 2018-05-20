@@ -95,6 +95,7 @@ class Parser:
 
     def determine_code_language(self):
         ext = os.path.splitext(self.filepath)[1][1:]
+        print(ext)
         return self.SUPPORTED_CODE_FILE_EXTENSIONS.get(ext)
 
     def __iter__(self):
