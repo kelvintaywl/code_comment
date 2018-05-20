@@ -11,6 +11,7 @@ class CodeLanguage:
     PHP = 'php'
     JAVASCRIPT = 'javascript'
     GOLANG = 'go'
+    CPP = 'cpp'
 
     @staticmethod
     def factory(code_name):
@@ -22,6 +23,8 @@ class CodeLanguage:
             return JavascriptCodeLanguage
         elif code_name == CodeLanguage.GOLANG:
             return GolangCodeLanguage
+        elif code_name == CodeLanguage.CPP:
+            return CppCodeLanguage
         raise CodeLanguageUnsupported
 
 
@@ -38,6 +41,10 @@ class JavascriptCodeLanguage(BaseCodeLanguage):
 
 
 class GolangCodeLanguage(BaseCodeLanguage):
+    pass
+    
+
+class CppCodeLanguage(BaseCodeLanguage):
     pass
 
 
@@ -58,7 +65,8 @@ class Parser:
         'py': CodeLanguage.PYTHON,
         'php': CodeLanguage.PHP,
         'js': CodeLanguage.JAVASCRIPT,
-        'go': CodeLanguage.GOLANG
+        'go': CodeLanguage.GOLANG,
+        'cpp': CodeLanguage.CPP
     }
 
     @staticmethod
