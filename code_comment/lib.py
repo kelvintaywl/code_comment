@@ -164,9 +164,9 @@ class Parser:
             ):
                 if not text:
                     continue
-
+                print("Log1", text)
                 aaa = is_multi_line_comment_midst(text)
-                print("Log",aaa)
+                print("Log2",aaa)
                 if is_single_line_comment(text):
                     comment_text = text.split(slc_header)[1].strip()
                     yield Comment(comment_text, self.filepath, line_number)
