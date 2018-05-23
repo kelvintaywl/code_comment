@@ -65,7 +65,7 @@ class PHPCodeLanguage(BaseCodeLanguage):
 class PythonCodeLanguage(CodeLanguage):
 
     SINGLE_LINE_COMMENT = ('#', None)
-    MULTI_LINE_COMMENT = ('"""', None, '"""') 
+    MULTI_LINE_COMMENT = ('"""', None, '"""')
 
 
 class Parser:
@@ -143,7 +143,6 @@ class Parser:
                 not is_currently_multi_line_comment()
                 and text.startswith(mlc_header)
                 and (not text.endswith(mlc_footer) or len(text) == 3)
-                # and not is_single_line_comment_multiline_notation(text)
             )
 
         def is_multi_line_comment_midst(text):
@@ -166,15 +165,6 @@ class Parser:
             ):
                 if not text:
                     continue
-                print("Log1", text)
-                aaa = is_multi_line_comment_midst(text)
-                
-                print("is_single_line_comment.    ", is_single_line_comment(text))
-                print("is_single_line_comment_multiline_notation.   ", is_single_line_comment_multiline_notation(text))
-                print("is_multi_line_comment_start(text).    ", is_multi_line_comment_start(text))
-                print("is_multi_line_comment_midst   ",aaa)
-                print("is_multi_line_comment_end    ", is_multi_line_comment_end(text))
-
 
                 if is_single_line_comment(text):
                     comment_text = text.split(slc_header)[1].strip()
@@ -188,15 +178,12 @@ class Parser:
                 elif is_multi_line_comment_start(text):
                     comment_text = text.split(mlc_header)[1].strip()
                     tmp.append([comment_text, line_number])
-                    print("tmp is ", tmp)
 
-                elif aaa:
+                elif is_multi_line_comment_midst(text):
                     comment_text = text
-                    print("within func ", mlc_middle)
                     if mlc_middle:
                         comment_text = text.split(mlc_middle)[1].strip()
                     tmp.append([comment_text, line_number])
-                    print("within tmp ", tmp)
 
                 elif is_multi_line_comment_end(text):
                     comment_text = text.rsplit(mlc_footer)[0].strip()
