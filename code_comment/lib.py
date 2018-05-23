@@ -65,7 +65,7 @@ class PHPCodeLanguage(BaseCodeLanguage):
 class PythonCodeLanguage(CodeLanguage):
 
     SINGLE_LINE_COMMENT = ('#', None)
-    MULTI_LINE_COMMENT = ('"""', None, '"""')
+    MULTI_LINE_COMMENT = ('"""', None, '"""') 
 
 
 class Parser:
@@ -165,6 +165,8 @@ class Parser:
                 if not text:
                     continue
 
+                aaa = is_multi_line_comment_midst(text)
+                print("Log"+ aaa)
                 if is_single_line_comment(text):
                     comment_text = text.split(slc_header)[1].strip()
                     yield Comment(comment_text, self.filepath, line_number)
@@ -178,7 +180,7 @@ class Parser:
                     comment_text = text.split(mlc_header)[1].strip()
                     tmp.append([comment_text, line_number])
 
-                elif is_multi_line_comment_midst(text):
+                elif aaa:
                     comment_text = text
                     if mlc_middle:
                         comment_text = text.split(mlc_middle)[1].strip()
