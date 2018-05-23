@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os.path
+import re
 
 from code_comment.models import Comment
 from code_comment.errors import CodeLanguageUnsupported
@@ -164,7 +165,7 @@ class Parser:
                 [l.strip() for l in f], start=1
             ):
                 text = re.sub(r"'''", '"""', text)
-                
+
                 if not text:
                     continue
 
