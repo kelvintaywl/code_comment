@@ -163,6 +163,8 @@ class Parser:
             for line_number, text in enumerate(
                 [l.strip() for l in f], start=1
             ):
+                text = re.sub(r"'''", '"""', text)
+                
                 if not text:
                     continue
 
