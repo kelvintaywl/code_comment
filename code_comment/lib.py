@@ -178,7 +178,7 @@ class Parser:
                     continue
 
                 if is_single_line_comment(text):
-                    comment_text = text.split(slc_header)[1].strip()
+                    comment_text = text.split(slc_header)[1:].strip()
                     yield Comment(comment_text, self.filepath, line_number)
 
                 elif is_single_line_comment_multiline_notation(text):
