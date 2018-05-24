@@ -165,20 +165,20 @@ class Parser:
                 [l.strip() for l in f], start=1
             ):
                 text = re.sub(r"'''", '"""', text)
-                print("Log1", text)
-                aaa = is_multi_line_comment_midst(text)
-                print("Log2",aaa)
+                # print("Log1", text)
+                # aaa = is_multi_line_comment_midst(text)
+                # print("Log2",aaa)
 
-                print("is_single_line_comment.    ", is_single_line_comment(text))
-                print("is_single_line_comment_multiline_notation.   ", is_single_line_comment_multiline_notation(text))
-                print("is_multi_line_comment_start(text).    ", is_multi_line_comment_start(text))
-                print("is_multi_line_comment_midst   ",aaa)
-                print("is_multi_line_comment_end    ", is_multi_line_comment_end(text))
+                # print("is_single_line_comment.    ", is_single_line_comment(text))
+                # print("is_single_line_comment_multiline_notation.   ", is_single_line_comment_multiline_notation(text))
+                # print("is_multi_line_comment_start(text).    ", is_multi_line_comment_start(text))
+                # print("is_multi_line_comment_midst   ",aaa)
+                # print("is_multi_line_comment_end    ", is_multi_line_comment_end(text))
                 if not text:
                     continue
 
                 if is_single_line_comment(text):
-                    comment_text = text.split(slc_header)[1:].strip()
+                    comment_text = text.split(slc_header)[1].strip()
                     yield Comment(comment_text, self.filepath, line_number)
 
                 elif is_single_line_comment_multiline_notation(text):
