@@ -11,6 +11,9 @@ Parser to extract code comments in source codes.
 - Javascript
 - PHP
 - Python
+- CPP
+- C
+- JAVA
 
 ## Example Usage
 
