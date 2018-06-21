@@ -15,6 +15,7 @@ class CodeLanguage:
     CPP = 'cpp'
     C = 'c'
     JAVA = 'java'
+    H = 'h'
 
     @staticmethod
     def factory(code_name):
@@ -32,6 +33,8 @@ class CodeLanguage:
             return CCodeLanguage
         elif code_name == CodeLanguage.JAVA:
             return JavaCodeLanguage
+        elif code_name == CodeLanguage.H:
+            return CLangHeaderCodeLanguage
         raise CodeLanguageUnsupported
 
 
@@ -50,6 +53,10 @@ class GolangCodeLanguage(BaseCodeLanguage):
     pass
 
 class CppCodeLanguage(BaseCodeLanguage):
+    pass
+
+class CLangHeaderCodeLanguage(BaseCodeLanguage):
+    print("heloo mera naam hjai amana hjsdajndadnssudusdu")
     pass
 
 class CCodeLanguage(BaseCodeLanguage):
@@ -78,7 +85,8 @@ class Parser:
         'go': CodeLanguage.GOLANG,
         'cpp': CodeLanguage.CPP,
         'c': CodeLanguage.C,
-        'java': CodeLanguage.JAVA
+        'java': CodeLanguage.JAVA,
+        'h': CodeLanguage.H
     }
 
     @staticmethod
