@@ -56,7 +56,6 @@ class CppCodeLanguage(BaseCodeLanguage):
     pass
 
 class CLangHeaderCodeLanguage(BaseCodeLanguage):
-    print("heloo mera naam hjai amana hjsdajndadnssudusdu")
     pass
 
 class CCodeLanguage(BaseCodeLanguage):
