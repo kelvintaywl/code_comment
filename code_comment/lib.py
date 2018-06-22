@@ -34,7 +34,7 @@ class CodeLanguage:
         elif code_name == CodeLanguage.JAVA:
             return JavaCodeLanguage
         elif code_name == CodeLanguage.H:
-            return CLangHeaderCodeLanguage
+            return CppHeaderCodeLanguage
         raise CodeLanguageUnsupported
 
 
@@ -55,13 +55,13 @@ class GolangCodeLanguage(BaseCodeLanguage):
 class CppCodeLanguage(BaseCodeLanguage):
     pass
 
-class CLangHeaderCodeLanguage(BaseCodeLanguage):
-    pass
-
 class CCodeLanguage(BaseCodeLanguage):
     pass
 
 class JavaCodeLanguage(BaseCodeLanguage):
+    pass
+
+class CppHeaderCodeLanguage(BaseCodeLanguage):
     pass
 
 class PHPCodeLanguage(BaseCodeLanguage):
@@ -83,9 +83,11 @@ class Parser:
         'js': CodeLanguage.JAVASCRIPT,
         'go': CodeLanguage.GOLANG,
         'cpp': CodeLanguage.CPP,
+        'cc': CodeLanguage.CPP
         'c': CodeLanguage.C,
         'java': CodeLanguage.JAVA,
-        'h': CodeLanguage.H
+        'h': CodeLanguage.H,
+        'hpp': CodeLanguage.H
     }
 
     @staticmethod
