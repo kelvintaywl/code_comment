@@ -83,7 +83,7 @@ class Parser:
         'js': CodeLanguage.JAVASCRIPT,
         'go': CodeLanguage.GOLANG,
         'cpp': CodeLanguage.CPP,
-        'cc': CodeLanguage.CPP
+        'cc': CodeLanguage.CPP,
         'c': CodeLanguage.C,
         'java': CodeLanguage.JAVA,
         'h': CodeLanguage.H,
