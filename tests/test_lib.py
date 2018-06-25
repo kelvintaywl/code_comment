@@ -12,6 +12,7 @@ from code_comment.lib import (
     CppCodeLanguage,
     CCodeLanguage,
     JavaCodeLanguage,
+    CppHeaderCodeLanguage,
     Parser
 )
 from code_comment.errors import CodeLanguageUnsupported
@@ -29,7 +30,8 @@ def test_code_language_factory_success():
         ('python', PythonCodeLanguage),
         ('cpp', CppCodeLanguage),
         ('c', CCodeLanguage),
-        ('java', JavaCodeLanguage)
+        ('java', JavaCodeLanguage),
+        ('h', CppHeaderCodeLanguage)
     ]:
         klass = CodeLanguage.factory(language)
         assert klass == KodeLanguage
@@ -42,7 +44,7 @@ def test_code_language_factory_fail():
 
 def test_parser_is_supported_code_extension_success():
     for ext in [
-        'php', 'py', 'go', 'js', 'cpp', 'c', 'java'
+        'php', 'py', 'go', 'js', 'cpp', 'c', 'java', 'h', 'cc', 'hpp'
     ]:
         assert Parser.is_supported_code_extension(ext) is True
 
