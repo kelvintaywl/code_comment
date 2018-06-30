@@ -17,6 +17,7 @@ class CodeLanguage:
     JAVA = 'java'
     H = 'h'
     CSS = 'css'
+    HTML = 'html'
 
     @staticmethod
     def factory(code_name):
@@ -38,6 +39,8 @@ class CodeLanguage:
             return CppHeaderCodeLanguage
         elif code_name == CodeLanguage.CSS:
             return CSSCodeLanguage
+        elif code_name == CodeLanguage.HTML:
+            return HTMLCodeLanguage
         raise CodeLanguageUnsupported
 
 
@@ -74,11 +77,15 @@ class PHPCodeLanguage(BaseCodeLanguage):
     # NOTE: assuming PHPDoc style
     MULTI_LINE_COMMENT = ('/**', '*', '*/')
 
+class HTMLCodeLanguage(BaseCodeLanguage):
+    MULTI_LINE_COMMENT = ('<!--', None, '-->')
 
 class PythonCodeLanguage(CodeLanguage):
 
     SINGLE_LINE_COMMENT = ('#', None)
     MULTI_LINE_COMMENT = ('"""', None, '"""')
+
+
 
 
 class Parser:
@@ -94,7 +101,8 @@ class Parser:
         'java': CodeLanguage.JAVA,
         'h': CodeLanguage.H,
         'hpp': CodeLanguage.H,
-        'css': CodeLanguage.CSS
+        'css': CodeLanguage.CSS,
+        'html': HTMLCodeLanguage
     }
 
     @staticmethod
