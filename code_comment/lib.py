@@ -16,6 +16,7 @@ class CodeLanguage:
     C = 'c'
     JAVA = 'java'
     H = 'h'
+    CSS = 'css'
 
     @staticmethod
     def factory(code_name):
@@ -35,6 +36,8 @@ class CodeLanguage:
             return JavaCodeLanguage
         elif code_name == CodeLanguage.H:
             return CppHeaderCodeLanguage
+        elif code_name == CodeLanguage.CSS:
+            return CSSCodeLanguage
         raise CodeLanguageUnsupported
 
 
@@ -47,6 +50,9 @@ class BaseCodeLanguage(CodeLanguage):
 
 
 class JavascriptCodeLanguage(BaseCodeLanguage):
+    pass
+
+class CSSCodeLanguage(BaseCodeLanguage):
     pass
 
 class GolangCodeLanguage(BaseCodeLanguage):
@@ -87,7 +93,8 @@ class Parser:
         'c': CodeLanguage.C,
         'java': CodeLanguage.JAVA,
         'h': CodeLanguage.H,
-        'hpp': CodeLanguage.H
+        'hpp': CodeLanguage.H,
+        'css': CodeLanguage.CSS
     }
 
     @staticmethod
@@ -190,7 +197,23 @@ class Parser:
                 [l.strip() for l in f], start=1
             ):
                 text = re.sub(r"'''", '"""', text)
+                # print(text)
+                # if multi line print starts and python then continue 
+                # if multi print is going on 
+                # if multi stops then look from next line 
 
+                
+                # is_multi_line_print_in_python(text)
+                # print("code language is ", self.determine_code_language())
+                # print("Log1", text)
+                # aaa = is_multi_line_comment_midst(text)
+                # print("Log2",aaa)
+
+                # print("is_single_line_comment.    ", is_single_line_comment(text))
+                # print("is_single_line_comment_multiline_notation.   ", is_single_line_comment_multiline_notation(text))
+                # print("is_multi_line_comment_start(text).    ", is_multi_line_comment_start(text))
+                # print("is_multi_line_comment_midst   ",aaa)
+                # print("is_multi_line_comment_end    ", is_multi_line_comment_end(text))
                 if not text:
                     continue
 
