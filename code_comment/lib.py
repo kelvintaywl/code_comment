@@ -102,7 +102,7 @@ class Parser:
         'h': CodeLanguage.H,
         'hpp': CodeLanguage.H,
         'css': CodeLanguage.CSS,
-        'html': HTMLCodeLanguage
+        'html': CodeLanguage.HTML
     }
 
     @staticmethod
