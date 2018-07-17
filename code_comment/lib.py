@@ -75,7 +75,7 @@ class CppHeaderCodeLanguage(BaseCodeLanguage):
 
 class PHPCodeLanguage(BaseCodeLanguage):
     # NOTE: assuming PHPDoc style
-    MULTI_LINE_COMMENT = ('/**', '*', '*/')
+    MULTI_LINE_COMMENT = ('/*', None, '*/')
 
 class HTMLCodeLanguage(BaseCodeLanguage):
     MULTI_LINE_COMMENT = ('<!--', None, '-->')
