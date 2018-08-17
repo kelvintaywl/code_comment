@@ -11,6 +11,12 @@ class CodeLanguage:
     PHP = 'php'
     JAVASCRIPT = 'javascript'
     GOLANG = 'go'
+    CPP = 'cpp'
+    C = 'c'
+    JAVA = 'java'
+    H = 'h'
+    CSS = 'css'
+    HTML = 'html'
 
     @staticmethod
     def factory(code_name):
@@ -22,6 +28,18 @@ class CodeLanguage:
             return JavascriptCodeLanguage
         elif code_name == CodeLanguage.GOLANG:
             return GolangCodeLanguage
+        elif code_name == CodeLanguage.CPP:
+            return CppCodeLanguage
+        elif code_name == CodeLanguage.C:
+            return CCodeLanguage
+        elif code_name == CodeLanguage.JAVA:
+            return JavaCodeLanguage
+        elif code_name == CodeLanguage.H:
+            return CppHeaderCodeLanguage
+        elif code_name == CodeLanguage.CSS:
+            return CSSCodeLanguage
+        elif code_name == CodeLanguage.HTML:
+            return HTMLCodeLanguage
         raise CodeLanguageUnsupported
 
 
@@ -37,13 +55,37 @@ class JavascriptCodeLanguage(BaseCodeLanguage):
     pass
 
 
+class CSSCodeLanguage(BaseCodeLanguage):
+    pass
+
+
 class GolangCodeLanguage(BaseCodeLanguage):
+    pass
+
+
+class CppCodeLanguage(BaseCodeLanguage):
+    pass
+
+
+class CCodeLanguage(BaseCodeLanguage):
+    pass
+
+
+class JavaCodeLanguage(BaseCodeLanguage):
+    pass
+
+
+class CppHeaderCodeLanguage(BaseCodeLanguage):
     pass
 
 
 class PHPCodeLanguage(BaseCodeLanguage):
     # NOTE: assuming PHPDoc style
     MULTI_LINE_COMMENT = ('/**', '*', '*/')
+
+
+class HTMLCodeLanguage(BaseCodeLanguage):
+    MULTI_LINE_COMMENT = ('<!--', None, '-->')
 
 
 class PythonCodeLanguage(CodeLanguage):
@@ -58,7 +100,15 @@ class Parser:
         'py': CodeLanguage.PYTHON,
         'php': CodeLanguage.PHP,
         'js': CodeLanguage.JAVASCRIPT,
-        'go': CodeLanguage.GOLANG
+        'go': CodeLanguage.GOLANG,
+        'cpp': CodeLanguage.CPP,
+        'cc': CodeLanguage.CPP,
+        'c': CodeLanguage.C,
+        'java': CodeLanguage.JAVA,
+        'h': CodeLanguage.H,
+        'hpp': CodeLanguage.H,
+        'css': CodeLanguage.CSS,
+        'html': CodeLanguage.HTML
     }
 
     @staticmethod
