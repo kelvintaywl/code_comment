@@ -72,8 +72,8 @@ def test_parser_init_fail():
 def test_parser_parse_python_success():
     parser = Parser(os.path.join(FIXTURE_DIR, 'dummy.py'))
     comments = list(parser)
-
-    assert len(comments) == 4
+    
+    assert len(comments) == 5
 
     assert comments[0].line_number_str == '1~3'
     assert comments[0].is_multiline
@@ -90,3 +90,7 @@ def test_parser_parse_python_success():
     assert comments[3].line_number_str == '13'
     assert not comments[3].is_multiline
     assert comments[3].body_str == 'Test single-line multiline comment'
+
+    assert comments[4].line_number_str == '19'
+    assert not comments[4].is_multiline
+    assert comments[4].body_str == 'Testing multi-line comment after Multi-line print statement'
