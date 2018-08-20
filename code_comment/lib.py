@@ -227,7 +227,7 @@ class Parser:
                     flag = 1
                     continue
 
-                elif is_python() and flag == 1 and bool(re.search(r'"""', text)):
+                elif is_python() and flag and bool(re.search(r'"""', text)):
                     # Multi line print ends
                     flag = 0
                     continue
