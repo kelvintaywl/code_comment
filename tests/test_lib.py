@@ -9,6 +9,12 @@ from code_comment.lib import (
     PHPCodeLanguage,
     GolangCodeLanguage,
     JavascriptCodeLanguage,
+    CppCodeLanguage,
+    CCodeLanguage,
+    JavaCodeLanguage,
+    CppHeaderCodeLanguage,
+    CSSCodeLanguage,
+    HTMLCodeLanguage,
     Parser
 )
 from code_comment.errors import CodeLanguageUnsupported
@@ -23,7 +29,13 @@ def test_code_language_factory_success():
         ('go', GolangCodeLanguage),
         ('javascript', JavascriptCodeLanguage),
         ('php', PHPCodeLanguage),
-        ('python', PythonCodeLanguage)
+        ('python', PythonCodeLanguage),
+        ('cpp', CppCodeLanguage),
+        ('c', CCodeLanguage),
+        ('java', JavaCodeLanguage),
+        ('h', CppHeaderCodeLanguage),
+        ('css', CSSCodeLanguage),
+        ('html', HTMLCodeLanguage)
     ]:
         klass = CodeLanguage.factory(language)
         assert klass == KodeLanguage
@@ -36,14 +48,15 @@ def test_code_language_factory_fail():
 
 def test_parser_is_supported_code_extension_success():
     for ext in [
-        'php', 'py', 'go', 'js'
+        'php', 'py', 'go', 'js', 'cpp', 'cc', 'c', 'java', 'h', 'hpp',
+        'css', 'html'
     ]:
         assert Parser.is_supported_code_extension(ext) is True
 
 
 def test_parser_is_supported_code_extension_fail():
     for ext in [
-        '', None, 'cpp', 'rb'
+        '', None, 'rb', 'sh'
     ]:
         assert Parser.is_supported_code_extension(ext) is False
 
@@ -61,7 +74,7 @@ def test_parser_parse_python_success():
     parser = Parser(os.path.join(FIXTURE_DIR, 'dummy.py'))
     comments = list(parser)
 
-    assert len(comments) == 4
+    assert len(comments) == 5
 
     assert comments[0].line_number_str == '1~3'
     assert comments[0].is_multiline
@@ -78,3 +91,8 @@ def test_parser_parse_python_success():
     assert comments[3].line_number_str == '13'
     assert not comments[3].is_multiline
     assert comments[3].body_str == 'Test single-line multiline comment'
+
+    assert comments[4].line_number_str == '19'
+    assert not comments[4].is_multiline
+    assert comments[4].body_str == 'Testing multi-line comment after \
+Multi-line print statement'
